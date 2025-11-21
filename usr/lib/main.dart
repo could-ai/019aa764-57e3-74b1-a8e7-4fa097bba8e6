@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'screens/home_screen.dart';
-import 'screens/login_screen.dart';
+import 'package:couldai_user_app/screens/login_screen.dart';
+import 'package:couldai_user_app/screens/home_screen.dart';
+import 'package:couldai_user_app/screens/chat_room_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,28 +13,37 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'لعبة الدردشة الذهبية',
+      title: 'لعبة الدردشة',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
-        useMaterial3: true,
-        fontFamily: 'Arial', // Using a standard font for now
+        primarySwatch: Colors.teal,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        scaffoldBackgroundColor: Colors.grey[200],
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.teal,
+          foregroundColor: Colors.white,
+          elevation: 0,
+        ),
+        buttonTheme: ButtonThemeData(
+          buttonColor: Colors.teal,
+          textTheme: ButtonTextTheme.primary,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+        ),
       ),
-      // إعدادات اللغة العربية
-      locale: const Locale('ar', 'AE'),
-      supportedLocales: const [
-        Locale('ar', 'AE'),
-        Locale('en', 'US'),
-      ],
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
+      // To support Arabic RTL
+      builder: (context, child) {
+        return Directionality(
+          textDirection: TextDirection.rtl,
+          child: child!,
+        );
+      },
       initialRoute: '/',
       routes: {
         '/': (context) => const LoginScreen(),
         '/home': (context) => const HomeScreen(),
+        '/chat_room': (context) => ChatRoomScreen(roomName: ModalRoute.of(context)!.settings.arguments as String),
       },
     );
   }

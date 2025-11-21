@@ -1,70 +1,65 @@
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
-
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _usernameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber.shade50,
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.chat_bubble_outline, size: 100, color: Colors.amber),
-              const SizedBox(height: 20),
-              const Text(
-                'مرحباً بك في عالم الدردشة',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 10),
-              const Text(
-                'اجمع الذهب، احصل على الهدايا، وكن الأفضل!',
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-              ),
-              const SizedBox(height: 40),
-              TextField(
-                controller: _usernameController,
-                decoration: InputDecoration(
-                  labelText: 'اسم المستخدم',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.teal, Colors.cyan],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(32.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text(
+                  'مرحباً بك في لعبة الدردشة',
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
-                  prefixIcon: const Icon(Icons.person),
-                  filled: true,
-                  fillColor: Colors.white,
+                  textAlign: TextAlign.center,
                 ),
-              ),
-              const SizedBox(height: 20),
-              SizedBox(
-                width: double.infinity,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_usernameController.text.isNotEmpty) {
-                      Navigator.pushReplacementNamed(context, '/home');
-                    }
-                  },
+                const SizedBox(height: 40),
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: 'أدخل اسم المستخدم',
+                    filled: true,
+                    fillColor: Colors.white.withOpacity(0.8),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
+                    prefixIcon: const Icon(Icons.person, color: Colors.teal),
+                  ),
+                  textAlign: TextAlign.right,
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.amber,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+                    textStyle: const TextStyle(fontSize: 18, fontFamily: 'Arial'),
+                     shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                    )
                   ),
-                  child: const Text('دخول', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(context, '/home');
+                  },
+                  child: const Text('دخول'),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
